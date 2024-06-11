@@ -1,0 +1,4 @@
+Flask
+OpenAI
+requests
+Beautifulsoup4
