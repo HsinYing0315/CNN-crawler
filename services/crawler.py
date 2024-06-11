@@ -14,8 +14,9 @@ def fetch_article(url):
         paragraphs = soup.find_all('p', class_='paragraph')
         
         article = {
+            'url': url + ' ',
             'title': soup.title.string,
-            'paragraph': '\n'.join(paragraph.get_text(strip=True) for paragraph in paragraphs)
+            'paragraph': '\n\n'.join(paragraph.get_text(strip=True) for paragraph in paragraphs)
         }
         return article
     else:

@@ -1,6 +1,6 @@
 from flask import Flask, request
 import requests
-from crawler import fetch_article
+from services.summarize import summarize
 
 app = Flask(__name__)
 
@@ -8,12 +8,12 @@ app = Flask(__name__)
 def index():
     return "Hello World"
 
-@app.route('/create', methods=['POST'])
+@app.route('/create', methods=['GET'])
 def create_document():
     url = request.args.get('url')
-    article = fetch_article(url=url)
+    summarized = summarize(url)
     
-    response = requests.post('https://script.google.com/macros/s/AKfycby6LfysEkt2vAr_ztIfMuZ736PyKNXz1iJDjiw5ZrFpLkp3gojEKsfLk1jVtq0JZgR71w/exec', json=article)
+    response = requests.post('https://script.google.com/macros/s/AKfycbwgYt-sqixHoaLjyqtx-NCcaVHQNZPrRyK1cspg73mQnDDuIoI8QVJxEYeNHzQHuG9Bxw/exec', json=summarized)
     
     if response.status_code == 200:
         return response.text
