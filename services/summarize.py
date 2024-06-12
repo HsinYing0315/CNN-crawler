@@ -9,7 +9,7 @@ def summarize(url):
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a critic who is familiar with tech and good at summarizing. I would like you to analyze the provided news article and create a bullet-point summary for me."},
+            {"role": "system", "content": "You are a critic who is familiar with tech and good at summarizing. I would like you to analyze the provided news article and create a bullet-point summary with 3 to 5 main points and their details for me."},
             {"role": "user", "content": article['paragraph']},
         ]
     )
