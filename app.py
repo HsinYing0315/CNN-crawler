@@ -1,5 +1,6 @@
 from flask import Flask, request
 import requests
+import webbrowser
 from services.summarize import summarize
 
 app = Flask(__name__)
@@ -16,7 +17,8 @@ def create_document():
     response = requests.post('https://script.google.com/macros/s/AKfycbwgYt-sqixHoaLjyqtx-NCcaVHQNZPrRyK1cspg73mQnDDuIoI8QVJxEYeNHzQHuG9Bxw/exec', json=summarized)
     
     if response.status_code == 200:
-        return response.text
+        webbrowser.open(response.text)
+        return "done!"
     else:
         return (f"狀態碼：{response.status_code}")
 
